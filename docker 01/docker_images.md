@@ -37,6 +37,9 @@ docker build  .
 ```
 
 ### Containers
+#### Characteristics
+* ephemeral content, we lost info inside when container is stopped
+* 
 list active containers
 ```
 docker ps   
@@ -101,3 +104,19 @@ docker exec --it [idContainer/nameContainer] /bin/bash
 ```
 docker exec [idContainer/nameContainer] bash -c "sleep 10"
 ```
+### Volumes
+#### Method Bind
+* deprecated
+* only in DEV environments
+
+Create a new container with some bind mounts configured.
+```
+docker create --name dev01 --mount type=bind, source="$(pwd)/app", target=/app nginx:latest
+```
+* `docker create` will create a new container but not start it
+* `--name dev01` names the container dev01
+* `--mount` configures a bind mount from the host into the container
+* `type=bind` specifies this is a bind mount
+* `source="$(pwd)/app"` binds the host's current directory ./app into the container
+* `target=/app` mounts the host path into /app in the container
+* `nginx:latest` uses the latest Nginx image
